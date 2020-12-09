@@ -23,3 +23,28 @@ const users = {
     name: 'Normal Editor',
   },
 };
+
+module.exports = [
+  {
+    url: 'admin/user/login',
+    type: 'post',
+    response: (config) => {
+      const { username } = config.body;
+      const token = tokens[username];
+
+      if (!token) {
+        return {
+          code: 60204,
+          message: 'Account ans password are incorrect',
+        };
+      }
+      return {
+        code: 20000,
+        data: token,
+      };
+    },
+  },
+  {
+    url: '/vue-admin-template/user/info.*',
+  },
+];
