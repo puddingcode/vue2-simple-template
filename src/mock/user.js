@@ -45,6 +45,33 @@ module.exports = [
     },
   },
   {
-    url: '/vue-admin-template/user/info.*',
+    url: '/admin/user/info.*',
+    type: 'get',
+    response: (config) => {
+      const { token } = config.query;
+      const info = users[token];
+
+      if (!info) {
+        return {
+          code: 50008,
+          message: 'Login failed.unable to get user details',
+        };
+      }
+      return {
+        code: 20000,
+        data: info,
+      };
+    },
+  },
+
+  {
+    url: '/admin/user/logout',
+    type: 'post',
+    response: (_) => {
+      return {
+        code: 20000,
+        data: 'success',
+      };
+    },
   },
 ];

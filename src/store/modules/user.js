@@ -1,5 +1,5 @@
-import { login, logout, getInfo } from '@api/user';
-import { getToken, setToken, removeToken } from '@/api/user';
+import { login, logout, getInfo } from '@/api/user';
+import { getToken, setToken, removeToken } from '@/utils/auth';
 import { resetRouter } from '../../router';
 import { Object } from 'core-js';
 
@@ -76,15 +76,15 @@ const actions = {
         });
     });
   },
-};
 
-resetToken({commit}){
-    return new Promise(resolve=>{
-        removeToken()
-        commit('RESET_STATE')
-        resolve()
-    })
-}
+  resetToken({ commit }) {
+    return new Promise((resolve) => {
+      removeToken();
+      commit('RESET_STATE');
+      resolve();
+    });
+  },
+};
 
 export default {
   namespced: true,
